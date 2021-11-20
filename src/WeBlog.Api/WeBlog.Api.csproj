@@ -10,8 +10,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WeBlog.IRepository\WeBlog.IRepository.csproj" />
+    <ProjectReference Include="..\WeBlog.IService\WeBlog.IService.csproj" />
     <ProjectReference Include="..\WeBlog.Model\WeBlog.Model.csproj" />
     <ProjectReference Include="..\WeBlog.Repository\WeBlog.Repository.csproj" />
+    <ProjectReference Include="..\WeBlog.Service\WeBlog.Service.csproj" />
   </ItemGroup>
 
 </Project>

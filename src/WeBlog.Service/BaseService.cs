@@ -14,7 +14,7 @@ namespace WeBlog.Service
 {
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class, new()
     {
-        protected readonly IBaseRepository<TEntity> _baseRepository;
+        protected IBaseRepository<TEntity> _baseRepository;
 
         public async Task<bool> CreateAsync(TEntity entity)
         {

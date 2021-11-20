@@ -14,6 +14,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using WeBlog.IRepository;
+using WeBlog.IService;
+using WeBlog.Repository;
+using WeBlog.Service;
+
 namespace WeBlog.Api
 {
     public class Startup
@@ -42,6 +47,9 @@ namespace WeBlog.Api
                 DbType = IocDbType.SqlServer,
                 IsAutoCloseConnection = true//自动释放
             }); ;
+
+            //注册Ioc服务
+            services.AddCustomIoc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +70,24 @@ namespace WeBlog.Api
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    public static class IocExtension
+    {
+        /// <summary>
+        /// 注册自定义服务到IOC
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCustomIoc(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+            services.AddScoped<IBlogPostService, BlogPostService>();
+            services.AddScoped<ITypeInfoRepository, TypeInfoRepository>();
+            services.AddScoped<ITypeInfoService, TypeInfoService>();
+            return services;
         }
     }
 }
