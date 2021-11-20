@@ -37,29 +37,29 @@ namespace WeBlog.Repository
             return await base.DeleteByIdAsync(id);
         }
 
-        public async Task<TEntity> FindByIdAsync(int id)
+        public virtual async Task<TEntity> FindByIdAsync(int id)
         {
             return await base.GetByIdAsync(id);
         }
 
-        public async Task<List<TEntity>> QueryAsync()
+        public virtual async Task<List<TEntity>> QueryAsync()
         {
             return await base.GetListAsync();
         }
 
-        public async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> func)
+        public virtual async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> func)
         {
             return await base.GetListAsync(func);
         }
 
-        public async Task<List<TEntity>> QueryAsync(int page, int size, RefAsync<int> total)
+        public virtual async Task<List<TEntity>> QueryAsync(int page, int size, RefAsync<int> total)
         {
             return await base.Context
                 .Queryable<TEntity>()
                 .ToPageListAsync(page, size, total);
         }
 
-        public async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> func, int page, int size, RefAsync<int> total)
+        public virtual async Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> func, int page, int size, RefAsync<int> total)
         {
             return await base.Context
                 .Queryable<TEntity>()
@@ -67,9 +67,9 @@ namespace WeBlog.Repository
                 .ToPageListAsync(page, size, total);
         }
 
-        public Task<bool> UpdateAsync(TEntity entity)
+        public virtual async Task<bool> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            return await base.UpdateAsync(entity);
         }
     }
 
