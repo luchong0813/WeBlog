@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using System.Threading.Tasks;
 
+using WeBlog.Api.Utility.ApiResponse;
 using WeBlog.IService;
 
 namespace WeBlog.Api.Controllers
@@ -19,9 +20,10 @@ namespace WeBlog.Api.Controllers
         }
 
         [HttpGet("BlogPost")]
-        public async Task<ActionResult> GetBlogPost() {
+        public async Task<ActionResult<ApiResult>> GetBlogPost() {
             var blog= await _BlogPostService.QueryAsync();
-            return Ok(blog);
+            if (blog == null || blog.Count <= 0) return ApiResultHelper.Error("没有更多数据");
+            return ApiResultHelper.Success(blog);
         }
     }
 }
