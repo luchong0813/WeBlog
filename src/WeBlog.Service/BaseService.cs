@@ -26,6 +26,11 @@ namespace WeBlog.Service
            return await _baseRepository.DeleteAsync(id);
         }
 
+        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> func)
+        {
+           return await _baseRepository.FindAsync(func);
+        }
+
         public async Task<TEntity> FindByIdAsync(int id)
         {
             return await _baseRepository.FindByIdAsync(id);

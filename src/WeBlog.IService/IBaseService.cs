@@ -15,6 +15,7 @@ namespace WeBlog.IService
         Task<bool> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(int id);
         Task<TEntity> FindByIdAsync(int id);
+        Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> func);
         Task<List<TEntity>> QueryAsync();
         /// <summary>
         /// 自定义表达式条件查询

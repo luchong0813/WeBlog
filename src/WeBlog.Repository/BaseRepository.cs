@@ -38,6 +38,11 @@ namespace WeBlog.Repository
             return await base.DeleteByIdAsync(id);
         }
 
+        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> func)
+        {
+            return await base.GetSingleAsync(func);
+        }
+
         public virtual async Task<TEntity> FindByIdAsync(int id)
         {
             return await base.GetByIdAsync(id);
