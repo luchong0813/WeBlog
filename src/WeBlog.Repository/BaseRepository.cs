@@ -1,4 +1,5 @@
 ﻿using SqlSugar;
+using SqlSugar.IOC;
 
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,14 @@ namespace WeBlog.Repository
 
         public BaseRepository(ISqlSugarClient context = null) : base(context)
         {
-            base.Context = context;
-            //如果不存在创建数据库
-            context.DbMaintenance.CreateDatabase(); //个别数据库不支持
-            //创建表
-            context.CodeFirst.InitTables(
-                typeof(Author),
-                typeof(TypeInfo),
-                typeof(BlogPost));
+            base.Context =DbScoped.Sugar;
+            ////如果不存在创建数据库
+            //base.Context.DbMaintenance.CreateDatabase(); //个别数据库不支持
+            ////创建表
+            //base.Context.CodeFirst.InitTables(
+            //    typeof(Author),
+            //    typeof(TypeInfo),
+            //    typeof(BlogPost));
         }
 
         public async Task<bool> CreateAsync(TEntity entity)
