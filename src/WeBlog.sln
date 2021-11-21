@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.IService", "WeBlog.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.Service", "WeBlog.Service\WeBlog.Service.csproj", "{BDA42BE6-1297-4C3D-98D6-877D0C83F0F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeBlog.Share", "WeBlog.Share\WeBlog.Share.csproj", "{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.Share", "WeBlog.Share\WeBlog.Share.csproj", "{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeBlog.JWT", "WeBlog.JWT\WeBlog.JWT.csproj", "{D54B2538-B799-4E18-B636-798F94D8B5D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.JWT", "WeBlog.JWT\WeBlog.JWT.csproj", "{D54B2538-B799-4E18-B636-798F94D8B5D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

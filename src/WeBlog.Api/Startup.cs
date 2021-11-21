@@ -41,6 +41,32 @@ namespace WeBlog.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeBlog.Api", Version = "v1" });
+
+                //丝袜哥使用鉴权组件
+                c.AddSecurityDefinition("WeBlog", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Description = "直接在下框中输入WeBlog {token}（注意两者之间是一个空格）",
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Scheme = "WeBlog"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+          {
+            new OpenApiSecurityScheme
+            {
+              Reference=new OpenApiReference
+              {
+                Type=ReferenceType.SecurityScheme,
+                Id="Bearer"
+              }
+            },
+            new string[] {}
+          }
+        });
+
             });
 
             //注入SqlSugar Ioc
@@ -69,7 +95,9 @@ namespace WeBlog.Api
             }
 
             app.UseRouting();
-
+            //注册用户认证组件到管道中
+            app.UseAuthentication();
+            //用户授权
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
