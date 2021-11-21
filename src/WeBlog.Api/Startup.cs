@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 using SqlSugar.IOC;
@@ -12,6 +14,7 @@ using SqlSugar.IOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 using WeBlog.IRepository;
@@ -50,6 +53,9 @@ namespace WeBlog.Api
 
             //注册Ioc服务
             services.AddCustomIoc();
+
+            //注册JWT鉴权
+            services.AddCustomJWT();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +93,31 @@ namespace WeBlog.Api
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<ITypeInfoRepository, TypeInfoRepository>();
             services.AddScoped<ITypeInfoService, TypeInfoService>();
+            return services;
+        }
+
+        /// <summary>
+        /// 注册JWT鉴权到IOC
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCustomJWT(this IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SDMC-CJAS1-SAD-DFSFA-SADHJVF-VF")),
+                    ValidateIssuer = true,
+                    ValidIssuer = "http://localhost:6060",
+                    ValidateAudience = true,
+                    ValidAudience = "http://localhost:5000",
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(60)
+                };
+            });
             return services;
         }
     }
