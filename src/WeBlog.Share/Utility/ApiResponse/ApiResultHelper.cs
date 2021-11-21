@@ -1,6 +1,4 @@
-﻿using SqlSugar;
-
-namespace WeBlog.Api.Utility.ApiResponse
+﻿namespace WeBlog.Api.Utility.ApiResponse
 {
     public static class ApiResultHelper
     {
@@ -25,7 +23,7 @@ namespace WeBlog.Api.Utility.ApiResponse
         /// <param name="data">数据</param>
         /// <param name="total">总页数</param>
         /// <returns></returns>
-        public static ApiResult Success(dynamic data, RefAsync<int> total)
+        public static ApiResult Success(dynamic data, int total)
         {
             return new ApiResult()
             {

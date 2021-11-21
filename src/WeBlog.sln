@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.IRepository", "WeBlo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.Repository", "WeBlog.Repository\WeBlog.Repository.csproj", "{47EE7EBA-F09C-4536-9595-3BA88ABC46A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeBlog.IService", "WeBlog.IService\WeBlog.IService.csproj", "{AEE3670F-4491-4BFA-9D7D-DEDF15BBAF2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.IService", "WeBlog.IService\WeBlog.IService.csproj", "{AEE3670F-4491-4BFA-9D7D-DEDF15BBAF2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeBlog.Service", "WeBlog.Service\WeBlog.Service.csproj", "{BDA42BE6-1297-4C3D-98D6-877D0C83F0F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeBlog.Service", "WeBlog.Service\WeBlog.Service.csproj", "{BDA42BE6-1297-4C3D-98D6-877D0C83F0F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeBlog.Share", "WeBlog.Share\WeBlog.Share.csproj", "{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{BDA42BE6-1297-4C3D-98D6-877D0C83F0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDA42BE6-1297-4C3D-98D6-877D0C83F0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDA42BE6-1297-4C3D-98D6-877D0C83F0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C9D75F-A9A4-4780-A48A-7531E3EE31A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
