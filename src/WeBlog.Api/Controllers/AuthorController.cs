@@ -30,8 +30,8 @@ namespace WeBlog.Api.Controllers
             Author authorModel = new Author()
             {
                 Name = name,
-                UserName = MD5Helper.GenerateMD5(userName),
-                UserPwd = userPwd
+                UserName = userName,
+                UserPwd = MD5Helper.GenerateMD5(userPwd)
             };
             var result = await _AuthorService.CreateAsync(authorModel);
             if (result) return ApiResultHelper.Success(authorModel);

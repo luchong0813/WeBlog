@@ -19,7 +19,7 @@ using WeBlog.IService;
 using WeBlog.Repository;
 using WeBlog.Service;
 
-namespace WeBlog.Api
+namespace WeBlog.JWT
 {
     public class Startup
     {
@@ -37,7 +37,7 @@ namespace WeBlog.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeBlog.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeBlog.JWT", Version = "v1" });
             });
 
             //注入SqlSugar Ioc
@@ -47,9 +47,8 @@ namespace WeBlog.Api
                 DbType = IocDbType.SqlServer,
                 IsAutoCloseConnection = true//自动释放
             });
-
-            //注册Ioc服务
-            services.AddCustomIoc();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +58,7 @@ namespace WeBlog.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeBlog.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeBlog.JWT v1"));
             }
 
             app.UseRouting();
@@ -70,24 +69,6 @@ namespace WeBlog.Api
             {
                 endpoints.MapControllers();
             });
-        }
-    }
-    public static class IocExtension
-    {
-        /// <summary>
-        /// 注册自定义服务到IOC
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddCustomIoc(this IServiceCollection services)
-        {
-            services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IAuthorService, AuthorService>();
-            services.AddScoped<IBlogPostRepository, BlogPostRepository>();
-            services.AddScoped<IBlogPostService, BlogPostService>();
-            services.AddScoped<ITypeInfoRepository, TypeInfoRepository>();
-            services.AddScoped<ITypeInfoService, TypeInfoService>();
-            return services;
         }
     }
 }
