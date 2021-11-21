@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 using WeBlog.Api.Utility.ApiResponse;
+using WeBlog.Api.Utility.MD5Util;
 using WeBlog.IService;
 using WeBlog.Model;
 
@@ -29,7 +30,7 @@ namespace WeBlog.Api.Controllers
             Author authorModel = new Author()
             {
                 Name = name,
-                UserName = userName,
+                UserName = MD5Helper.GenerateMD5(userName),
                 UserPwd = userPwd
             };
             var result = await _AuthorService.CreateAsync(authorModel);
