@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using System;
 using System.Threading.Tasks;
 
 using WeBlog.Api.Utility.ApiResponse;
@@ -48,6 +49,25 @@ namespace WeBlog.Api.Controllers
             var result = await _AuthorService.DeleteAsync(author.Id);
             if (result) return ApiResultHelper.Success(author);
             return ApiResultHelper.Error("用户删除失败");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ApiResult>> Get()
+        {
+            var authors = await _AuthorService.QueryAsync();
+            if (authors == null || authors.Count <= 0) return ApiResultHelper.Error("没有更多数据");
+            return ApiResultHelper.Success(authors);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ApiResult>> Edit(string name)
+        {
+            var id = Convert.ToInt32(User.FindFirst("Id").Value);
+            var author = await _AuthorService.FindByIdAsync(id);
+            author.Name = name;
+            var result = await _AuthorService.UpdateAsync(author);
+            if (result) return ApiResultHelper.Success(null);
+            return ApiResultHelper.Error("修改失败");
         }
     }
 }

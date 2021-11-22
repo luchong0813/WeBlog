@@ -43,14 +43,14 @@ namespace WeBlog.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeBlog.Api", Version = "v1" });
 
                 //丝袜哥使用鉴权组件
-                c.AddSecurityDefinition("WeBlog", new OpenApiSecurityScheme
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Description = "直接在下框中输入WeBlog {token}（注意两者之间是一个空格）",
                     Name = "Authorization",
                     BearerFormat = "JWT",
-                    Scheme = "WeBlog"
+                    Scheme = "Bearer"
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
         {
@@ -93,8 +93,8 @@ namespace WeBlog.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeBlog.Api v1"));
             }
-
             app.UseRouting();
+
             //注册用户认证组件到管道中
             app.UseAuthentication();
             //用户授权
