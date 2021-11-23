@@ -1,3 +1,5 @@
+using AutoMapper;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +23,7 @@ using WeBlog.IRepository;
 using WeBlog.IService;
 using WeBlog.Repository;
 using WeBlog.Service;
+using WeBlog.Share.Utility.AutoMapper;
 
 namespace WeBlog.Api
 {
@@ -82,6 +85,13 @@ namespace WeBlog.Api
 
             //×¢²áJWT¼øÈ¨
             services.AddCustomJWT();
+
+            //×¢²áAutoMapper
+            var autoMapperConfiguration = new MapperConfiguration(config =>
+            {
+                config.AddProfile(new AutoMapperProfile());
+            });
+            services.AddSingleton(autoMapperConfiguration.CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
