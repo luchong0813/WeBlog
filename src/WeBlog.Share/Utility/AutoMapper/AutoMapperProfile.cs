@@ -16,6 +16,13 @@ namespace WeBlog.Share.Utility.AutoMapper
         public AutoMapperProfile()
         {
             CreateMap<Author, AuthorDto>();
+            CreateMap<BlogPost, BlogPostDto>()
+                .ForMember(dest => dest.AuthorName,
+                source => source
+                .MapFrom(src => src.AuthorInfo.Name))
+                .ForMember(dest => dest.TypeName,
+                source => source
+                .MapFrom(src => src.TypeInfo.TagName));
         }
     }
 }

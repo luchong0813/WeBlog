@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using SqlSugar;
+
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using WeBlog.Api.Utility.ApiResponse;
 using WeBlog.IService;
 using WeBlog.Model;
+using WeBlog.Model.Dto;
 
 namespace WeBlog.Api.Controllers
 {
@@ -24,11 +30,22 @@ namespace WeBlog.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResult>> Get() {
-            var id = Convert.ToInt32(User.FindFirst("Id").Value);
-            var blog= await _BlogPostService.QueryAsync(b=>b.AuthorId==id);
-            if (blog == null || blog.Count <= 0) return ApiResultHelper.Error("没有更多数据");
-            return ApiResultHelper.Success(blog);
+        public async Task<ActionResult<ApiResult>> Get([FromServices]IMapper iMapper, int page,int size) {
+            try
+            {
+                var id = Convert.ToInt32(User.FindFirst("Id").Value);
+                RefAsync<int> total = 0;
+                var blog = await _BlogPostService.QueryAsync(b => b.AuthorId == id, page, size, total);
+                if (blog.Count > 0) {
+                   var blogDto= iMapper.Map<List<BlogPostDto>>(blog);
+                    return ApiResultHelper.Success(blogDto,total);
+                }
+                return ApiResultHelper.Error("没有更多数据");
+            }
+            catch (Exception ex)
+            {
+                return ApiResultHelper.Error($"内部服务器异常，{ex.Message}");
+            }
         }
 
         [HttpPost]
