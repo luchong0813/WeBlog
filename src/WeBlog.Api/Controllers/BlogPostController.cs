@@ -14,6 +14,7 @@ using WeBlog.Api.Utility.ApiResponse;
 using WeBlog.IService;
 using WeBlog.Model;
 using WeBlog.Model.Dto;
+using WeBlog.Share.Utility.Attributes;
 
 namespace WeBlog.Api.Controllers
 {
@@ -29,6 +30,7 @@ namespace WeBlog.Api.Controllers
             _BlogPostService = blogPostService;
         }
 
+        [TypeFilter(typeof(CustomResourceFilteAttribute))]
         [HttpGet]
         public async Task<ActionResult<ApiResult>> Get([FromServices]IMapper iMapper, int page,int size) {
             try

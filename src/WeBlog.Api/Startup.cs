@@ -92,6 +92,9 @@ namespace WeBlog.Api
                 config.AddProfile(new AutoMapperProfile());
             });
             services.AddSingleton(autoMapperConfiguration.CreateMapper());
+
+            //×¢²á»º´æ·þÎñ
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
