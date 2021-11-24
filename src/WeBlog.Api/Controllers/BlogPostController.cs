@@ -25,7 +25,8 @@ namespace WeBlog.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<ApiResult>> Get() {
-            var blog= await _BlogPostService.QueryAsync();
+            var id = Convert.ToInt32(User.FindFirst("Id").Value);
+            var blog= await _BlogPostService.QueryAsync(b=>b.AuthorId==id);
             if (blog == null || blog.Count <= 0) return ApiResultHelper.Error("没有更多数据");
             return ApiResultHelper.Success(blog);
         }
@@ -42,8 +43,8 @@ namespace WeBlog.Api.Controllers
                 LikeCount=0,
                 BrowseCount=0,
                 CreatTime=DateTime.Now,
-                AuthorId=1
-            };
+                AuthorId= Convert.ToInt32(User.FindFirst("Id").Value)
+        };
             var result=await _BlogPostService.CreateAsync(blog);
             if(result) return ApiResultHelper.Success(blog);
             return ApiResultHelper.Error("文章创建失败");
